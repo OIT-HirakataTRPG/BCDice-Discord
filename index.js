@@ -3,7 +3,9 @@ const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits} = require('discord.js');
 const { DynamicLoader } = require('bcdice');
 const dotenv = require('dotenv');
+const Database = require('better-sqlite3');
 
+const db = new Database('./db/setting.db');
 dotenv.config();
 
 const client = new Client({
