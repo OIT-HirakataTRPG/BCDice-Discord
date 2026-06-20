@@ -13,8 +13,7 @@ module.exports = {
 
     async execute(interaction) {
         const roll = interaction.options.getString('roll');
-        const system = 'Cthulhu';
-        await executeDice(interaction, system, roll);
+        await executeDice(interaction, interaction.user.id, roll);
     }
 };
 
