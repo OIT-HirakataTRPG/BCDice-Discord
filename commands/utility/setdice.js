@@ -1,10 +1,11 @@
 const { SlashCommandBuilder } = require('discord.js');
 const Database = require('better-sqlite3');
+const {translateSystemName} = require('../helper/translate_system_name');
 
 const db = new Database('./db/setting.db' , { verbose: console.log });
 db.pragma('journal_mode = WAL');
 
-const detectUser = db.prepare(`SELECT user_id FROM DiceSystem WHERE user_id = ?`);
+const getUser = db.prepare(`SELECT * FROM DiceSystem WHERE user_id = ?`);
 const insertDiceSystem = db.prepare(`INSERT INTO DiceSystem (user_id, system) VALUES (?, ?);`);
 const updateDiceSystem = db.prepare(`UPDATE DiceSystem SET system = ? WHERE user_id = ?;`);
 
@@ -31,15 +32,16 @@ module.exports = {
     async execute(interaction) {
         const system = interaction.options.getString('system');
         const user_id = interaction.user.id;
-        if (detectUser) {
+        const user = getUser.get(user_id);
+        if (user) {
             updateDiceSystem.run(system, user_id);
         } else {
             insertDiceSystem.run(user_id, system);
         }
         await interaction.reply({
-            content: (`(工事中)使用するダイスを ${system} に設定しました`),
+            content: (`使用するダイスを \`${await translateSystemName(system)}\` に設定しました`),
             allowedMentions: { repliedUser: false },
-            flags: 'Ephemeral'
+            // flags: 'Ephemeral'
         });
     }
 };

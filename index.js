@@ -87,7 +87,7 @@ client.on('messageCreate', async (message) => {
 			});
 		} else {
 			await message.reply({
-				content: ("> " + message.content.replace('\*', '\\*') + "\n> ⇒ " + rollResult.text.replace('\*', '\\*')),
+				content: ("> " + message.content.replace(/\*/g, '\\*') + "\n> ⇒ " + rollResult.text.replace(/\*/g, '\\*')),
 				allowedMentions: { repliedUser: false },
 				flags: 'SuppressNotifications'
 			});
