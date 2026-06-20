@@ -4,7 +4,7 @@ const { executeDice } = require('../helper/dice_helper');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('dice')
+        .setName('d')
         .setDescription('ダイスを振れます')
         .addStringOption(option =>
             option.setName('roll')
