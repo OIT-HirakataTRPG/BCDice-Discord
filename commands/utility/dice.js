@@ -11,20 +11,29 @@ async function diceroll(system, roll) {
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('dice')
-    .setDescription('ダイスを振れます')
-    .addStringOption(option =>
-        option.setName('roll')
-            .setDescription('ダイスの値')
-            .setRequired(true)),
+        .setName('dice')
+        .setDescription('ダイスを振れます')
+        .addStringOption(option =>
+            option.setName('roll')
+                .setDescription('ダイスの値')
+                .setRequired(true)),
 
     async execute(interaction) {
         var rollResult = await diceroll('Cthulhu', interaction.options.getString('roll'));
         try {
-            await interaction.reply({
-                content: ("> " + interaction.options.getString('roll') + "\n> ⇒ " + rollResult.text),
-                allowedMentions: { repliedUser: false }
-            });
+            if (rollResult.secret) {
+                await interaction.reply({
+                    content: ("> " + interaction.options.getString('roll') + "\n> ⇒ " + rollResult.text),
+                    allowedMentions: { repliedUser: false },
+                    flags: 'Ephemeral'
+                });
+            } else {
+                await interaction.reply({
+                    content: ("> " + interaction.options.getString('roll') + "\n> ⇒ " + rollResult.text),
+                    allowedMentions: { repliedUser: false },
+                    flags: 'SuppressNotifications'
+                });
+            }
         } catch {
             await interaction.reply({
                 content: ("入力に誤りがあります"),
@@ -32,7 +41,6 @@ module.exports = {
                 flags: 'Ephemeral'
             });
         }
-        
     },
 };
 
