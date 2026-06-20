@@ -1,21 +1,21 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits} = require('discord.js');
 const { DynamicLoader } = require('bcdice');
 const dotenv = require('dotenv');
 
 dotenv.config();
 
 const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent 
-    ]
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent
+	]
 });
 
 
-client.commands = new Collection(); 
+client.commands = new Collection();
 
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
@@ -36,14 +36,14 @@ for (const folder of commandFolders) {
 
 client.on(Events.InteractionCreate, async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
-	
+
 	const command = client.commands.get(interaction.commandName);
-	
+
 	if (!command) {
 		console.error(`No command matching ${interaction.commandName} was found.`);
 		return;
 	}
-	
+
 	try {
 		await command.execute(interaction);
 	} catch (error) {
@@ -62,25 +62,31 @@ client.once(Events.ClientReady, (readyClient) => {
 });
 
 async function diceroll(system, roll) {
-  const loader = new DynamicLoader();
-  const GameSystem = await loader.dynamicLoad(system);
-  const result = GameSystem.eval(roll);
-  return result
+	const loader = new DynamicLoader();
+	const GameSystem = await loader.dynamicLoad(system);
+	const result = GameSystem.eval(roll);
+	return result
 }
 
 client.on('messageCreate', async (message) => {
-  if (message.author.bot) return
-  var rollResult = await diceroll('Cthulhu', message.content);
-    try {
-      await message.reply({
-        content: ("> " + message.content + "\n> ⇒ " + rollResult.text),
-        allowedMentions: { repliedUser: false }
-      });
-    } catch {
-      return
-    }
-  
+	if (message.author.bot) return
+	var rollResult = await diceroll('Cthulhu', message.content);
+	try {
+		if (rollResult.secret) {
+			await message.reply({
+				content: ("シークレットはアプリコマンドじゃないと作れなかったよ\nごめんね"),
+				flags: 'SuppressNotifications'
+			});
+		} else {
+			await message.reply({
+				content: ("> " + message.content.replace('\*', '\\*') + "\n> ⇒ " + rollResult.text.replace('\*', '\\*')),
+				allowedMentions: { repliedUser: false },
+				flags: 'SuppressNotifications'
+			});
+		}
+	} catch {
+		return
+	}
 });
-
 
 client.login(process.env.TOKEN);
