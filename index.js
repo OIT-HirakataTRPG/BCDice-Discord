@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits, MessageFlags } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits} = require('discord.js');
 const { DynamicLoader } = require('bcdice');
 const dotenv = require('dotenv');
 
@@ -79,7 +79,7 @@ client.on('messageCreate', async (message) => {
 			});
 		} else {
 			await message.reply({
-				content: ("> " + message.content + "\n> ⇒ " + rollResult.text),
+				content: ("> " + message.content.replace('\*', '\\*') + "\n> ⇒ " + rollResult.text.replace('\*', '\\*')),
 				allowedMentions: { repliedUser: false },
 				flags: 'SuppressNotifications'
 			});
