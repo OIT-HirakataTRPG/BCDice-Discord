@@ -12,7 +12,7 @@ const updateDiceSystem = db.prepare(`UPDATE DiceSystem SET system = ? WHERE user
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('setdice')
-        .setDescription('ダイスを指定します')
+        .setDescription('ダイスの種類を変更します')
         .addStringOption(option =>
             option.setName('system')
                 .setDescription('使用するダイスシステムを指定します')
@@ -25,7 +25,7 @@ module.exports = {
                 { name: 'ダブルクロス3rd', value: 'DoubleCross' },
                 { name: 'エモクロア', value: 'Emoklore' },
                 { name: '虚構侵蝕', value: 'KyokoShinshoku' },
-                { name: 'ソード・ワールド2.5', value: '	SwordWorld2.5' },
+                { name: 'ソード・ワールド2.5', value: 'SwordWorld2_5' },
                 { name: 'nRR', value: 'NRR' })
 			),
     

@@ -19,13 +19,13 @@ async function executeDice(interaction, user_id, roll) {
     try {
         if (rollResult.secret) {
             await interaction.reply({
-                content: ("> " + roll.replace(/\*/g, '\\*') + "\n> ⇒ " + rollResult.text.replace(/\*/g, '\\*')),
+                content: (">>> " + roll.replace(/\*/g, '\\*') + "\n> ⇒ " + rollResult.text.replace(/\*/g, '\\*')),
                 allowedMentions: { repliedUser: false },
                 flags: 'Ephemeral'
             });
         } else {
             await interaction.reply({
-                content: ("> " + roll.replace(/\*/g, '\\*') + "\n> ⇒ " + rollResult.text.replace(/\*/g, '\\*')),
+                content: (">>> " + roll.replace(/\*/g, '\\*') + "\n⇒ " + rollResult.text.replace(/\*/g, '\\*')),
                 allowedMentions: { repliedUser: false },
                 flags: 'SuppressNotifications'
             });
