@@ -25,7 +25,7 @@ module.exports = {
                 { name: 'ダブルクロス3rd', value: 'DoubleCross' },
                 { name: 'エモクロア', value: 'Emoklore' },
                 { name: '虚構侵蝕', value: 'KyokoShinshoku' },
-                { name: 'ソード・ワールド2.5', value: '	SwordWorld2.5' },
+                { name: 'ソード・ワールド2.5', value: 'SwordWorld2_5' },
                 { name: 'nRR', value: 'NRR' })
 			),
     

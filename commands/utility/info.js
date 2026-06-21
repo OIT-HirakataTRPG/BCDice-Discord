@@ -20,11 +20,11 @@ module.exports = {
         const user = getUser.get(interaction.user.id);
         const system = user ? user.system : 'DiceBot';
         const loader = new DynamicLoader();
-        const GameSystem = await loader.dynamicLoad(system);
+        const GameSystem = await loader.dynamicLoad(system.replace(/_/g, '.'));
         const helpText = GameSystem.HELP_MESSAGE;
-        if (system === 'ShinobiGami') {
+        if (system === 'ShinobiGami' || system === 'KyokoShinshoku' || system === 'SwordWorld2_5') {
             await interaction.reply({
-                content: `>>> ### シノビガミ ダイス説明\n${helpText.replace(/\*/g, '\\*')}`,
+                content: `>>> ### ${await translateSystemName(system)} ダイス説明\n${helpText.replace(/\*/g, '\\*')}`,
                 allowedMentions: { repliedUser: false },
                 flags: 'Ephemeral'
             });
