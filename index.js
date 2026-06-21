@@ -82,12 +82,12 @@ client.on('messageCreate', async (message) => {
 	try {
 		if (rollResult.secret) {
 			await message.reply({
-				content: ("シークレットはアプリコマンドじゃないと作れなかったよ\nごめんね"),
+				content: ("シークレットはアプリコマンドじゃないと作れなかったよ\nｺﾞﾒﾝﾈ"),
 				flags: 'SuppressNotifications'
 			});
 		} else {
 			await message.reply({
-				content: ("> " + message.content.replace(/\*/g, '\\*') + "\n> ⇒ " + rollResult.text.replace(/\*/g, '\\*')),
+				content: (">>> " + message.content.replace(/\*/g, '\\*') + "\n⇒ " + rollResult.text.replace(/\*/g, '\\*')),
 				allowedMentions: { repliedUser: false },
 				flags: 'SuppressNotifications'
 			});
