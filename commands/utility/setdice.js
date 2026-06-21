@@ -12,7 +12,7 @@ const updateDiceSystem = db.prepare(`UPDATE DiceSystem SET system = ? WHERE user
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('setdice')
-        .setDescription('ダイスを指定します')
+        .setDescription('ダイスの種類を変更します')
         .addStringOption(option =>
             option.setName('system')
                 .setDescription('使用するダイスシステムを指定します')
