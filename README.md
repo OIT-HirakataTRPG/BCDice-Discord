@@ -75,6 +75,28 @@ node index.js
 
 ---
 
+## 🐳 Dev Containers (VSCode) を使用した開発
+
+VSCodeの **Dev Containers** 拡張機能を利用すると、ローカル環境を汚さずにDockerコンテナ内で簡単に開発を始めることができます。
+
+### 1. 前提条件
+- **Docker** がインストールされ、起動していること。
+- VSCodeに [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) 拡張機能がインストールされていること。
+
+### 2. セットアップ手順
+1. 本プロジェクトをVSCodeで開きます。
+2. 画面右下に表示される「Reopen in Container (コンテナで再度開く)」のポップアップをクリックするか、コマンドパレット（`Ctrl+Shift+P` / `Cmd+Shift+P`）から **「Dev Containers: Reopen in Container」** を選択します。
+3. 自動的に開発コンテナイメージ（`node:24-bookworm`ベース）のビルドと起動が行われます。
+   - コンテナ起動時に、`.env` ファイルの雛形作成（`.env.example` の自動コピー）および `npm install` が自動的に実行されます。
+4. 起動後、プロジェクトルートに生成された `.env` ファイルに、ご自身の `TOKEN` と `APPID` を記述します。
+5. VSCode内のターミナルを開き、コマンド登録とボットの起動を実行します。
+   ```bash
+   node deploy-commands.js
+   node index.js
+   ```
+
+---
+
 ## 🎲 使い方とコマンド (Usage & Commands)
 
 ### スラッシュコマンド
