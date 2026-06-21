@@ -41,7 +41,8 @@ module.exports = {
         await interaction.reply({
             content: (`使用するダイスを \`${await translateSystemName(system)}\` に設定しました`),
             allowedMentions: { repliedUser: false },
-            // flags: 'Ephemeral'
+            flags: 'Ephemeral'
+            // flags: 'SuppressNotifications'
         });
     }
 };
