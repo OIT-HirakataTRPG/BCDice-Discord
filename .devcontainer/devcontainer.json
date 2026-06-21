@@ -1,0 +1,22 @@
+{
+  "name": "BCDice Discord Bot",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24-bookworm",
+
+  // Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "PKief.material-icon-theme",
+        "mhutchie.git-graph"
+      ]
+    }
+  },
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "cp -n .env.example .env || true && npm install",
+
+  // Configure user
+  "remoteUser": "node"
+}
