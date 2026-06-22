@@ -78,6 +78,15 @@ async function diceroll(user_id, roll) {
 
 client.on('messageCreate', async (message) => {
 	if (message.author.bot) return
+	if (['二九季里', '二九'].includes(message.content)) {
+		var hutaku = await diceroll('DiceBot', 'D1987');
+		await message.reply({
+			content: (">>> D1987\n⇒ " + hutaku.text.replace(/\*/g, '\\*')),
+			allowedMentions: { repliedUser: false },
+			flags: 'SuppressNotifications'
+		});
+		return
+	}
 	var rollResult = await diceroll(message.author.id, message.content);
 	try {
 		if (rollResult.secret) {
