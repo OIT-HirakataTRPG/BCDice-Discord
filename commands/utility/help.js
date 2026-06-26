@@ -1,6 +1,4 @@
-const { DynamicLoader } = require('bcdice');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const Database = require('better-sqlite3');
 
 const dicehelpEmbed = new EmbedBuilder()
     .setTitle('このBotについて')
