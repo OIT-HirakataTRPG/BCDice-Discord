@@ -35,8 +35,6 @@ BCDiceを利用した、Discord用の多機能TRPGダイスボットです。
 - **Discord Bot アカウント**
   - [Discord Developer Portal](https://discord.com/developers/applications) でアプリケーションを作成し、ボットアカウントを作成してください。
   - **重要**: ボット設定画面（Botタブ）にて、以下の **Privileged Gateway Intents** を有効にしてください。
-    - `PRESENCE INTENT` (任意)
-    - `SERVER MEMBERS INTENT` (任意)
     - `MESSAGE CONTENT INTENT` (**必須**: メッセージからのダイスロール検出に必要です)
 
 ### 2. インストール
@@ -113,7 +111,7 @@ VSCodeの **Dev Containers** 拡張機能を利用すると、ローカル環境
 Botが参加しているチャンネルで、ダイスコマンド（例：`3d6`, `CC<=70` など）を入力すると、Botが自動的に反応して結果を返信します。
 
 > [!WARNING]
-> Discordの仕様上、シークレットロール（暗号化ロール）は通常のメッセージからは使用できません。  
+> Discordの仕様上、シークレットロールは通常のメッセージからは使用できません。  
 > シークレットロールを行いたい場合は、スラッシュコマンド（`/dice` または `/d`）を使用してください。
 
 ---
@@ -123,13 +121,13 @@ Botが参加しているチャンネルで、ダイスコマンド（例：`3d6`
 `/setdice` コマンドで以下の主要なシステムへ切り替えが可能です。
 
 - 通常ダイス（`DiceBot` / デフォルト）
-- クトゥルフ神話TRPG 6版（`Cthulhu`）
-- クトゥルフ神話TRPG 7版（`Cthulhu7th`）
-- 新忍神（`ShinobiGami`）
+- クトゥルフ神話TRPG（`Cthulhu`）
+- 新クトゥルフ神話TRPG（`Cthulhu7th`）
+- シノビガミ（`ShinobiGami`）
 - ダブルクロス 3rd Edition（`DoubleCross`）
 - エモクロアTRPG（`Emoklore`）
 - 虚構侵蝕TRPG（`KyokoShinshoku`）
-- ソード・ワールド2.5（`SwordWorld2_5`）
+- ソード・ワールド2.5（`SwordWorld2.5`）
 - nRR（`NRR`）
 
 より詳しい共通ダイスコマンドについては、[BCDiceコマンドガイド](https://docs.bcdice.org/) を参照してください。
