@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, ActivityType } = require('discord.js');
 const { DynamicLoader } = require('bcdice');
 const dotenv = require('dotenv');
 const Database = require('better-sqlite3');
@@ -15,7 +15,10 @@ const client = new Client({
 	]
 });
 
+
 client.commands = new Collection();
+
+
 
 if (!fs.existsSync('./db')) {
 	fs.mkdirSync('./db');
@@ -64,6 +67,10 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
 
 client.once(Events.ClientReady, (readyClient) => {
+	client.user.setActivity({ 
+		name: '/help でコマンド一覧を表示' ,
+		type: ActivityType.Custom
+	});
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
