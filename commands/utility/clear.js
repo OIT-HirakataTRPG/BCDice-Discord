@@ -19,7 +19,7 @@ module.exports = {
             return;
         }
         
-        if (!interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+        if (interaction.guild.id !== process.env.ADMINGUILDID || !interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             await interaction.reply({
                 content: "このコマンドを実行するには管理者権限が必要です",
                 allowedMentions: { repliedUser: false },
