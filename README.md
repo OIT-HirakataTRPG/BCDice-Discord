@@ -50,13 +50,15 @@ npm install
 ```env
 TOKEN=あなたのDiscordボットのトークン
 APPID=あなたのDiscordアプリケーションID
+ADMINGUILDID=管理者権限コマンドを実行できる鯖のID
+DOCURL=Botの停止手順が書かれたドキュメントのURL
 ```
 
 > [!TIP]
 > ルートにある `.env.example` をコピーして `.env` にリネームして使うと便利です。
 
 ### 4. アプリケーション（スラッシュ）コマンドの登録
-以下のコマンドを実行して、Discordにスラッシュコマンド（`/dice`, `/d`, `/setdice`, `/info`, `/help`）を登録します。
+以下のコマンドを実行して、Discordにスラッシュコマンド（`/dice`, `/setdice`, `/info`, `/help` など）を登録します。
 
 ```bash
 node deploy-commands.js
@@ -86,7 +88,7 @@ VSCodeの **Dev Containers** 拡張機能を利用すると、ローカル環境
 2. 画面右下に表示される「Reopen in Container (コンテナで再度開く)」のポップアップをクリックするか、コマンドパレット（`Ctrl+Shift+P` / `Cmd+Shift+P`）から **「Dev Containers: Reopen in Container」** を選択します。
 3. 自動的に開発コンテナイメージ（`node:24-bookworm`ベース）のビルドと起動が行われます。
    - コンテナ起動時に、`.env` ファイルの雛形作成（`.env.example` の自動コピー）および `npm install` が自動的に実行されます。
-4. 起動後、プロジェクトルートに生成された `.env` ファイルに、ご自身の `TOKEN` と `APPID` を記述します。
+4. 起動後、プロジェクトルートに生成された `.env` ファイルに、ご自身の `TOKEN`,  `APPID`, `ADMINGUILDID`, `DOCURL` を記述します。
 5. VSCode内のターミナルを開き、コマンド登録とボットの起動を実行します。
    ```bash
    node deploy-commands.js
@@ -106,6 +108,8 @@ VSCodeの **Dev Containers** 拡張機能を利用すると、ローカル環境
 | `/setdice` | 自分自身のデフォルトダイスシステムを変更します。 | `system`: 選択肢からシステムを選択 |
 | `/info` | 現在自分が設定しているダイスシステムの詳細なコマンドヘルプを表示します。（自分にのみ表示されます） | なし |
 | `/help` | ボットの簡単な説明と利用可能なコマンドの一覧を表示します。 | なし |
+| `/clear` | ボットに格納されているDBを初期化します (管理者権限必須) | なし |
+| `/stopbot` | ボットの停止方法の書かれたドキュメントに誘導します (管理者権限必須) | なし |
 
 ### 通常メッセージからのダイスロール
 Botが参加しているチャンネルで、ダイスコマンド（例：`3d6`, `CC<=70` など）を入力すると、Botが自動的に反応して結果を返信します。
