@@ -22,7 +22,7 @@ module.exports = {
         const loader = new DynamicLoader();
         const GameSystem = await loader.dynamicLoad(system);
         const helpText = GameSystem.HELP_MESSAGE;
-        if (system === 'ShinobiGami' || system === 'KyokoShinshoku' || system === 'SwordWorld2.5') {
+        if (['ShinobiGami', 'KyokoShinshoku', 'SwordWorld2.5'].includes(system)) {
             await interaction.reply({
                 content: `>>> ### ${await translateSystemName(system)} ダイス説明\n${helpText.replace(/\*/g, '\\*')}`,
                 allowedMentions: { repliedUser: false },
