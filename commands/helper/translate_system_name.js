@@ -7,7 +7,7 @@ async function translateSystemName(system) {
         'DoubleCross': 'ダブルクロス3rd',
         'Emoklore': 'エモクロア',
         'KyokoShinshoku': '虚構侵蝕',
-        'SwordWorld2_5': 'ソード・ワールド2.5',
+        'SwordWorld2.5': 'ソード・ワールド2.5',
         'NRR': 'nRR'
     };
     return systemNames[system] || system;

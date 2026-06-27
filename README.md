@@ -35,8 +35,6 @@ BCDiceを利用した、Discord用の多機能TRPGダイスボットです。
 - **Discord Bot アカウント**
   - [Discord Developer Portal](https://discord.com/developers/applications) でアプリケーションを作成し、ボットアカウントを作成してください。
   - **重要**: ボット設定画面（Botタブ）にて、以下の **Privileged Gateway Intents** を有効にしてください。
-    - `PRESENCE INTENT` (任意)
-    - `SERVER MEMBERS INTENT` (任意)
     - `MESSAGE CONTENT INTENT` (**必須**: メッセージからのダイスロール検出に必要です)
 
 ### 2. インストール
@@ -52,13 +50,15 @@ npm install
 ```env
 TOKEN=あなたのDiscordボットのトークン
 APPID=あなたのDiscordアプリケーションID
+ADMINGUILDID=管理者権限コマンドを実行できる鯖のID
+DOCURL=Botの停止手順が書かれたドキュメントのURL
 ```
 
 > [!TIP]
 > ルートにある `.env.example` をコピーして `.env` にリネームして使うと便利です。
 
 ### 4. アプリケーション（スラッシュ）コマンドの登録
-以下のコマンドを実行して、Discordにスラッシュコマンド（`/dice`, `/d`, `/setdice`, `/info`, `/help`）を登録します。
+以下のコマンドを実行して、Discordにスラッシュコマンド（`/dice`, `/setdice`, `/info`, `/help` など）を登録します。
 
 ```bash
 node deploy-commands.js
@@ -88,7 +88,7 @@ VSCodeの **Dev Containers** 拡張機能を利用すると、ローカル環境
 2. 画面右下に表示される「Reopen in Container (コンテナで再度開く)」のポップアップをクリックするか、コマンドパレット（`Ctrl+Shift+P` / `Cmd+Shift+P`）から **「Dev Containers: Reopen in Container」** を選択します。
 3. 自動的に開発コンテナイメージ（`node:24-bookworm`ベース）のビルドと起動が行われます。
    - コンテナ起動時に、`.env` ファイルの雛形作成（`.env.example` の自動コピー）および `npm install` が自動的に実行されます。
-4. 起動後、プロジェクトルートに生成された `.env` ファイルに、ご自身の `TOKEN` と `APPID` を記述します。
+4. 起動後、プロジェクトルートに生成された `.env` ファイルに、ご自身の `TOKEN`,  `APPID`, `ADMINGUILDID`, `DOCURL` を記述します。
 5. VSCode内のターミナルを開き、コマンド登録とボットの起動を実行します。
    ```bash
    node deploy-commands.js
@@ -108,12 +108,14 @@ VSCodeの **Dev Containers** 拡張機能を利用すると、ローカル環境
 | `/setdice` | 自分自身のデフォルトダイスシステムを変更します。 | `system`: 選択肢からシステムを選択 |
 | `/info` | 現在自分が設定しているダイスシステムの詳細なコマンドヘルプを表示します。（自分にのみ表示されます） | なし |
 | `/help` | ボットの簡単な説明と利用可能なコマンドの一覧を表示します。 | なし |
+| `/clear` | ボットに格納されているDBを初期化します (管理者権限必須) | なし |
+| `/stopbot` | ボットの停止方法の書かれたドキュメントに誘導します (管理者権限必須) | なし |
 
 ### 通常メッセージからのダイスロール
 Botが参加しているチャンネルで、ダイスコマンド（例：`3d6`, `CC<=70` など）を入力すると、Botが自動的に反応して結果を返信します。
 
 > [!WARNING]
-> Discordの仕様上、シークレットロール（暗号化ロール）は通常のメッセージからは使用できません。  
+> Discordの仕様上、シークレットロールは通常のメッセージからは使用できません。  
 > シークレットロールを行いたい場合は、スラッシュコマンド（`/dice` または `/d`）を使用してください。
 
 ---
@@ -123,13 +125,13 @@ Botが参加しているチャンネルで、ダイスコマンド（例：`3d6`
 `/setdice` コマンドで以下の主要なシステムへ切り替えが可能です。
 
 - 通常ダイス（`DiceBot` / デフォルト）
-- クトゥルフ神話TRPG 6版（`Cthulhu`）
-- クトゥルフ神話TRPG 7版（`Cthulhu7th`）
-- 新忍神（`ShinobiGami`）
+- クトゥルフ神話TRPG（`Cthulhu`）
+- 新クトゥルフ神話TRPG（`Cthulhu7th`）
+- シノビガミ（`ShinobiGami`）
 - ダブルクロス 3rd Edition（`DoubleCross`）
 - エモクロアTRPG（`Emoklore`）
 - 虚構侵蝕TRPG（`KyokoShinshoku`）
-- ソード・ワールド2.5（`SwordWorld2_5`）
+- ソード・ワールド2.5（`SwordWorld2.5`）
 - nRR（`NRR`）
 
 より詳しい共通ダイスコマンドについては、[BCDiceコマンドガイド](https://docs.bcdice.org/) を参照してください。
