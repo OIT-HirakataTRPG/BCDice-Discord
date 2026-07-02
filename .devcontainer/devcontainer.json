@@ -1,7 +1,10 @@
 {
   "name": "BCDice Discord Bot",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:24-bookworm",
+  "image": "node:24-slim",
   "runArgs": ["--name", "BCDice-Discord"],
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {}
+  },
 
   // Configure tool-specific properties.
   "customizations": {
