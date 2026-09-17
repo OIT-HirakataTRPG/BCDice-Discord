@@ -3,10 +3,11 @@ const path = require("node:path");
 const { Client, Collection, Events, GatewayIntentBits, ActivityType } = require("discord.js");
 const { DynamicLoader } = require("bcdice");
 const dotenv = require("dotenv");
-const Database = require("better-sqlite3");
+const { DatabaseSync } = require("node:sqlite");
 
 dotenv.config();
 
+// Discordクライアントの作成
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
@@ -15,19 +16,23 @@ const client = new Client({
 	],
 });
 
+// コマンドの読み込み
 client.commands = new Collection();
 
+// SQLiteの設定
 if (!fs.existsSync("./db")) {
 	fs.mkdirSync("./db");
 }
-const db = new Database("./db/setting.db");
+const db = new DatabaseSync("./db/setting.db");
 db.prepare(
 	`CREATE TABLE IF NOT EXISTS DiceSystem (
 	user_id INTEGER PRIMARY KEY,
 	system TEXT NOT NULL
 	);`,
 ).run();
+
 const getUser = db.prepare(`SELECT * FROM DiceSystem WHERE user_id = ?`);
+getUser.setReadBigInts(true);
 
 const commandsPath = path.join(__dirname, "commands/utility");
 const commandFiles = fs.readdirSync(commandsPath).filter((file) => file.endsWith(".js"));
