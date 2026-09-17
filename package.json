@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node deploy-commands.js",
+    "start-nobuild": "node index.js",
+    "start": "node deploy-commands.js && node index.js"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +15,6 @@
   "type": "commonjs",
   "dependencies": {
     "bcdice": "^4.9.0",
-    "better-sqlite3": "^12.11.1",
     "discord.js": "^14.26.4",
     "dotenv": "^17.4.2"
   },

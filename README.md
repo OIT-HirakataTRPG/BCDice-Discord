@@ -23,7 +23,6 @@ BCDiceを利用した、Discord用の多機能TRPGダイスボットです。
 - **Runtime**: Node.js
 - **Library**: [discord.js v14](https://discord.js.org/)
 - **Dice Engine**: [bcdice](https://github.com/bcdice/BCDice) (JavaScript版)
-- **Database**: [better-sqlite3](https://github.com/WiseLibs/better-sqlite3) (軽量・高速なSQLite3ラッパー)
 - **Configuration**: dotenv
 
 ---
@@ -57,18 +56,11 @@ DOCURL=Botの停止手順が書かれたドキュメントのURL
 > [!TIP]
 > ルートにある `.env.example` をコピーして `.env` にリネームして使うと便利です。
 
-### 4. アプリケーション（スラッシュ）コマンドの登録
-以下のコマンドを実行して、Discordにスラッシュコマンド（`/dice`, `/setdice`, `/info`, `/help` など）を登録します。
-
-```bash
-node deploy-commands.js
-```
-
-### 5. 起動
+### 4. 起動
 ボットを起動します。
 
 ```bash
-node index.js
+npm start
 ```
 
 ターミナルに `Ready! Logged in as <Botの名前>` と表示されれば起動完了です。
@@ -91,8 +83,7 @@ VSCodeの **Dev Containers** 拡張機能を利用すると、ローカル環境
 4. 起動後、プロジェクトルートに生成された `.env` ファイルに、ご自身の `TOKEN`,  `APPID`, `ADMINGUILDID`, `DOCURL` を記述します。
 5. VSCode内のターミナルを開き、コマンド登録とボットの起動を実行します。
    ```bash
-   node deploy-commands.js
-   node index.js
+   npm start
    ```
 
 ---
